@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@model Pokedex.Models.Pokemon.PokeNameForm
+
+<h2>Index</h2>
+<form asp-action="Index" asp-controller="Pokemon">
+  <label asp-for="Name"></label>
+  <input asp-for="Name" placeholder="Pokemon name. . . "/>
+  <input type="submit" name="Name"/>
+</form>
