@@ -18,9 +18,8 @@ namespace Pokedex.Data.Dex
         string url = $"{baseUrl}pokemon/{name}";
         HttpResponseMessage response = await client.GetAsync(url);
         response.EnsureSuccessStatusCode();
-        string responseBody = await response.Content.ReadAsStringAsync();
-        response.Content.
-        Console.WriteLine(responseBody);
+        Pokemon pokemon = await response.Content.ReadAsAsync<Pokemon>();
+        Console.WriteLine(pokemon.name);
       }
       catch (HttpRequestException e)
       {
