@@ -11,15 +11,29 @@ namespace Pokedex.Data.Dex
   {
     public string baseUrl = "https://pokeapi.co/api/v2/";
     static readonly HttpClient client = new HttpClient();
-    public async Task GetPokeNumAsync(string name)
+
+    public async Task<Pokemon> GetPokeNumAsync(string name)
+    {
+      string url = $"{baseUrl}pokemon/{name}";
+      return await PokeApiGet(url);
+    }
+
+    public async Task<Pokemon> GetRandomPokemon()
+    {
+      var rand = new Random();
+      int num = rand.Next(808);
+      string url = $"{baseUrl}pokemon/{num}";
+      return await PokeApiGet(url);
+    }
+
+    private async Task<Pokemon> PokeApiGet(string url)
     {
       try
       {
-        string url = $"{baseUrl}pokemon/{name}";
         HttpResponseMessage response = await client.GetAsync(url);
         response.EnsureSuccessStatusCode();
         Pokemon pokemon = await response.Content.ReadAsAsync<Pokemon>();
-        Console.WriteLine(pokemon.name);
+        return pokemon;
       }
       catch (HttpRequestException e)
       {
@@ -27,5 +41,6 @@ namespace Pokedex.Data.Dex
         throw;
       }
     }
+
   }
 }

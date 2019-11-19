@@ -5,8 +5,12 @@
 @model Pokedex.Models.Pokemon.PokeNameForm
 
 <h2>Index</h2>
-<form asp-action="Index" asp-controller="Pokemon">
+<form asp-action="Pokesolo" asp-controller="Pokemon">
   <label asp-for="Name"></label>
   <input asp-for="Name" placeholder="Pokemon name. . . "/>
   <input type="submit" name="Name"/>
+</form>
+
+<form asp-action="Pokerandom" asp-controller="Pokemon">
+   <input type="submit">
 </form>

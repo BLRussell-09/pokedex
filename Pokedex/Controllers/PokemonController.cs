@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Pokedex.Data.Dex;
+using Pokedex.Models.Pokemon;
 
 namespace Pokedex.Controllers
 {
@@ -16,12 +17,22 @@ namespace Pokedex.Controllers
         }
 
         [HttpPost]
-        public async void Index(string Name)
+        public async Task<IActionResult> Pokesolo(string Name)
         {
             Dex dex = new Dex();
             Name = Name.ToLower();
-            await dex.GetPokeNumAsync(Name);
-            Console.WriteLine("Gotcha");
+            Pokemon pokemon = await dex.GetPokeNumAsync(Name);
+            ViewBag.Pokemon = pokemon;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Pokerandom()
+        {
+            Dex dex = new Dex();
+            Pokemon pokemon = await dex.GetRandomPokemon();
+            ViewBag.Pokemon = pokemon;
+            return View();
         }
     }
 }
