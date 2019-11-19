@@ -1,7 +1,73 @@
 ﻿
 @{
-    ViewBag.Title = "Pokerandom";
+  ViewBag.Title = "Pokerandom";
 }
 
-<h2>Pokerandom</h2>
-<h2>@ViewBag.Pokemon.name</h2>
+<div class="row">
+  <div class="col-md-12">
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-md-1">
+          <h3>#@ViewBag.Pokemon.id</h3>
+        </div>
+        <div class="col-md-4">
+          <h1>@ViewBag.Pokemon.name </h1>
+        </div>
+        <div class="col-md-3">
+          @foreach (var sprite in ViewBag.Pokemon.sprites)
+           {
+              @if (sprite.Key == "front_default")
+               {
+                <a href="#" class="thumbnail">
+                  <img src=@sprite.Value alt="Alternate Text" />
+                </a>
+               }
+           }
+           <div class="panel panel-default">
+             <div class="panel-heading">
+               <h3 class="panel-title">Abilities</h3>
+             </div>
+             <ul class="list-group">
+               @foreach (var set in ViewBag.Pokemon.abilities)
+                {
+                 <li class="list-group-item">@set.ability["name"]</li>
+                }
+             </ul>   
+          </div>
+        </div>
+        <div class="col-md-4">
+          <ul>
+            <li class="list-group-item">Height: @ViewBag.Pokemon.height </li>
+          </ul>
+          <ul>
+            <li class="list-group-item">Weight: @ViewBag.Pokemon.weight g</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-lg-12">
+          <h2>Stats</h2>
+          <div class="row">
+            @foreach (var block in ViewBag.Pokemon.stats)
+             {
+              <div class="col-md-12 col-lg-6">
+                <ul>
+                  <li class="list-group-item">@block.stat["name"]: @block.base_stat</li>
+                </ul>
+              </div>
+             }
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <form asp-controller="Pokemon" asp-action="Pokerandom">
+            <p><button class="btn btn-primary btn-lg" href="#" type="submit">Random Pokemon</button></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

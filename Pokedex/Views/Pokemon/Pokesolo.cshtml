@@ -1,8 +1,59 @@
 ﻿@{
-
   ViewBag.Title = "Pokesolo";
 }
 
-<h1>Hello World</h1>
-<button>Craig</button>
-<h2>@ViewBag.Pokemon.name.t</h2>
+<div class="row">
+  <div class="col-md-12">
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-md-1">
+          <h3>#@ViewBag.Pokemon.id</h3>
+        </div>
+        <div class="col-md-5">
+          <h1>@ViewBag.Pokemon.name </h1>
+        </div>
+        <div class="col-md-3">
+          @foreach (var sprite in ViewBag.Pokemon.sprites)
+           {
+              @if (sprite.Key == "front_default")
+               {
+                <a href="#" class="thumbnail">
+                  <img src=@sprite.Value alt="Alternate Text" />
+                </a>
+               }
+           }
+          <div class="panel panel-default">
+             <div class="panel-heading">
+               <h3 class="panel-title">Abilities</h3>
+             </div>
+             <ul class="list-group">
+               @foreach (var set in ViewBag.Pokemon.abilities)
+                {
+                 <li class="list-group-item">@set.ability["name"]</li>
+                }
+             </ul>   
+          </div>        
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <ul>
+            <li class="list-group-item">Height: @ViewBag.Pokemon.height </li>
+          </ul>
+          <ul>
+            <li class="list-group-item">Weight: @ViewBag.Pokemon.weight g</li>
+          </ul>
+        </div>
+        <div class="col-md-3 col-md-offset-3">
+          <h2>Stats</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>...</p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
