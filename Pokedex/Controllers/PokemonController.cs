@@ -16,14 +16,26 @@ namespace Pokedex.Controllers
             return View();
         }
 
+        public IActionResult PokeSearch()
+        {
+      return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Pokesolo(string Name)
         {
-            Dex dex = new Dex();
-            Name = Name.ToLower();
-            Pokemon pokemon = await dex.GetPokeNumAsync(Name);
-            ViewBag.Pokemon = pokemon;
-            return View();
+            if (Name != null)
+            {
+                Dex dex = new Dex();
+                Name = Name.ToLower();
+                Pokemon pokemon = await dex.GetPokeNumAsync(Name);
+                ViewBag.Pokemon = pokemon;
+                return View();
+            }
+            else
+            {
+                return View("Index");
+            }
         }
 
         [HttpPost]
@@ -32,6 +44,7 @@ namespace Pokedex.Controllers
             Dex dex = new Dex();
             Pokemon pokemon = await dex.GetRandomPokemon();
             ViewBag.Pokemon = pokemon;
+            ViewData["Sprites"] = pokemon.sprites;
             return View();
         }
     }

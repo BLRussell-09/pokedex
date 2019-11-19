@@ -33,6 +33,7 @@ namespace Pokedex.Data.Dex
         HttpResponseMessage response = await client.GetAsync(url);
         response.EnsureSuccessStatusCode();
         Pokemon pokemon = await response.Content.ReadAsAsync<Pokemon>();
+        pokemon = pokemon.treatPokemon(pokemon);
         return pokemon;
       }
       catch (HttpRequestException e)
