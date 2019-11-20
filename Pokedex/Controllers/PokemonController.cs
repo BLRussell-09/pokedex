@@ -18,7 +18,7 @@ namespace Pokedex.Controllers
 
         public IActionResult PokeSearch()
         {
-      return View();
+            return View();
         }
 
         [HttpPost]
