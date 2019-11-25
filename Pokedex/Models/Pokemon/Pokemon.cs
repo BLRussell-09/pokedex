@@ -15,10 +15,13 @@ namespace Pokedex.Models.Pokemon
     public Dictionary<string, string> sprites { get; set; }
     public Abilities[] abilities { get; set; }
     public Stats[] stats { get; set; }
+    public string sprite { get; set; }
+    public Moves[] moves { get; set; }
 
     public Pokemon treatPokemon(Pokemon pokemon)
     {
       pokemon.name = Caps(pokemon.name);
+
       foreach (var set in pokemon.abilities)
       {
         set.ability["name"] = Caps(set.ability["name"]);
@@ -27,6 +30,9 @@ namespace Pokedex.Models.Pokemon
       {
         stat.stat["name"] = Caps(stat.stat["name"]);
       }
+      
+      pokemon.sprite = $"https://projectpokemon.org/images/normal-sprite/{pokemon.name.ToLower()}.gif";
+
       return pokemon;
     }
 

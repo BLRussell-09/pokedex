@@ -19,7 +19,7 @@
               @if (sprite.Key == "front_default")
                {
                 <a href="#" class="thumbnail">
-                  <img src=@sprite.Value alt="Alternate Text" />
+                  <img src=@ViewBag.Pokemon.sprite alt="Alternate Text" />
                 </a>
                }
            }
@@ -56,8 +56,25 @@
                 </ul>
               </div>
              }
+             <div class="col-md-3 col-sm-12">
+              <ul>
+                <li class="list-group-item">Height: @ViewBag.Pokemon.height </li>
+              </ul>
+              <ul>
+                <li class="list-group-item">Weight: @ViewBag.Pokemon.weight g</li>
+              </ul>
+            </div>
           </div>
         </div>
+      </div>
+      <div class="row" id="moveset">
+          <h2>Moves</h2>
+              <ul class="list-group">
+                   @foreach (var move in ViewBag.Pokemon.moves)
+                    {
+                      <li class="list-group-item">@move.move["name"]</li>
+                    }
+              </ul>
       </div>
       <div class="row">
         <div class="col-md-6">
