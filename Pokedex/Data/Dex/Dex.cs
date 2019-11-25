@@ -1,4 +1,5 @@
-﻿using Pokedex.Models.Pokemon;
+﻿using Pokedex.Models.Moveset;
+using Pokedex.Models.Pokemon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace Pokedex.Data.Dex
         response.EnsureSuccessStatusCode();
         Pokemon pokemon = await response.Content.ReadAsAsync<Pokemon>();
         pokemon = pokemon.treatPokemon(pokemon);
+        //await GetMoveDesc(pokemon);
         return pokemon;
       }
       catch (HttpRequestException e)
@@ -41,6 +43,29 @@ namespace Pokedex.Data.Dex
         Console.WriteLine("Message:{0} ", e.Message);
         throw;
       }
+    }
+
+    private async Task<Pokemon> GetMoveDesc(Pokemon pokemon)
+    {
+        var moves = pokemon.moves;
+        foreach (var move in moves)
+        {
+            string url = move.move["url"];
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                Move pokemove = await response.Content.ReadAsAsync<Move>();
+                Console.WriteLine(pokemove);
+                move.move["effect"] = pokemove.effect_entries[0].effect;
+            }
+            catch (HttpRequestException e)
+            {
+              Console.WriteLine("Message:{0} ", e.Message);
+              throw;
+            }
+        }
+        return pokemon;
     }
 
   }

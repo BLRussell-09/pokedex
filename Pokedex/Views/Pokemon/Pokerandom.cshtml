@@ -35,46 +35,39 @@
              </ul>   
           </div>
         </div>
-        <div class="col-md-4">
-          <ul>
-            <li class="list-group-item">Height: @ViewBag.Pokemon.height </li>
-          </ul>
-          <ul>
-            <li class="list-group-item">Weight: @ViewBag.Pokemon.weight g</li>
-          </ul>
-        </div>
       </div>
       <div class="row">
-        <div class="col-md-3 col-lg-12">
-          <h2>Stats</h2>
-          <div class="row">
-            @foreach (var block in ViewBag.Pokemon.stats)
-             {
-              <div class="col-md-12 col-lg-6">
-                <ul>
-                  <li class="list-group-item">@block.stat["name"]: @block.base_stat</li>
-                </ul>
-              </div>
-             }
-             <div class="col-md-3 col-sm-12">
+        <h2>Stats</h2>
+        <div class="row">
+          @foreach (var block in ViewBag.Pokemon.stats)
+            {
+            <div class="col-sm-12 col-md-6 col-lg-6">
               <ul>
-                <li class="list-group-item">Height: @ViewBag.Pokemon.height </li>
-              </ul>
-              <ul>
-                <li class="list-group-item">Weight: @ViewBag.Pokemon.weight g</li>
+                <li class="list-group-item">@block.stat["name"]: @block.base_stat</li>
               </ul>
             </div>
+            }
+            <div class="col-md-6 col-sm-12">
+            <ul>
+              <li class="list-group-item">Height: @ViewBag.Pokemon.height </li>
+            </ul>
+            <ul>
+              <li class="list-group-item">Weight: @ViewBag.Pokemon.weight g</li>
+            </ul>
           </div>
         </div>
       </div>
       <div class="row" id="moveset">
-          <h2>Moves</h2>
-              <ul class="list-group">
-                   @foreach (var move in ViewBag.Pokemon.moves)
-                    {
-                      <li class="list-group-item">@move.move["name"]</li>
-                    }
-              </ul>
+        <h2>Moves</h2>
+        @foreach (var move in ViewBag.Pokemon.moves)
+        {
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <ul class="list-group">
+              <li class="list-group-item">@move.move["name"]: @move.move["effect"]</li>
+            </ul>
+          </div>
+        }
+
       </div>
       <div class="row">
         <div class="col-md-6">
