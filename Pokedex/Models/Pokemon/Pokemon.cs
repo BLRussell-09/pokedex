@@ -30,6 +30,10 @@ namespace Pokedex.Models.Pokemon
       {
         stat.stat["name"] = Caps(stat.stat["name"]);
       }
+      foreach (var move in pokemon.moves)
+      {
+        move.move["name"] = Caps(move.move["name"]);
+      }
       
       pokemon.sprite = $"https://projectpokemon.org/images/normal-sprite/{pokemon.name.ToLower()}.gif";
 
